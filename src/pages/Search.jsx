@@ -37,13 +37,13 @@ function Search() {
             {error && <p>{error}</p>}
 
             <div>
-                {list.map((item, index) => (
+                {Array.isArray(list) ? list.map((item, index) => (
                     <Link key={index} to={`/detail/${item.imdbID}`}>
                         <img src={item.Poster} alt={item.Title} />
                         <h3>{item.Title}</h3>
                         <span>{item.Year}</span>
                     </Link>
-                ))}
+                )) : "검색 결과가 없습니다."}
             </div>
         </div>
     );
