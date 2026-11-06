@@ -1,6 +1,17 @@
 import { Link, useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar.jsx";
+import { Container } from "./Home.jsx";
+import styled from "styled-components";
+import MovieCard from "../components/MovieCard.jsx";
+
+const List = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 100px;
+    justify-content: center;
+`;
 
 function Search() {
     const [searchParams] = useSearchParams();
@@ -28,7 +39,7 @@ function Search() {
     }, [keyword]);
 
     return (
-        <div>
+        <Container>
             <h2>검색 키워드 : {keyword}</h2>
 
             <SearchBar keyword={keyword} />
@@ -36,16 +47,12 @@ function Search() {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
 
-            <div>
-                {Array.isArray(list) ? list.map((item, index) => (
-                    <Link key={index} to={`/detail/${item.imdbID}`}>
-                        <img src={item.Poster} alt={item.Title} />
-                        <h3>{item.Title}</h3>
-                        <span>{item.Year}</span>
-                    </Link>
-                )) : "검색 결과가 없습니다."}
-            </div>
-        </div>
+            <List>
+                {Array.isArray(list)
+                    ? list.map((x, index) => <MovieCard key={index} movie={x} />)
+                    : "검색 결과가 없습니다."}
+            </List>
+        </Container>
     );
 }
 

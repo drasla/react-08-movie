@@ -1,5 +1,27 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
+import { Container } from "./Home.jsx";
+import styled from "styled-components";
+
+const BackBtn = styled.button`
+    display: block;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+    color: #ff5959;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
+const Plot = styled.p`
+    line-height: 1.6;
+    margin-top: 20px;
+`;
 
 function Detail() {
     const { id } = useParams();
@@ -18,8 +40,8 @@ function Detail() {
     }
 
     return (
-        <div>
-            <button onClick={() => navigate(-1)}>&larr; Back</button>
+        <Container>
+            <BackBtn onClick={() => navigate(-1)}>&larr; Back</BackBtn>
 
             <img src={movie.Poster} alt={movie.Title} />
 
@@ -33,10 +55,10 @@ function Detail() {
             <p>
                 <strong>Director:</strong> {movie.Director}
             </p>
-            <p>
+            <Plot>
                 {movie.Plot}
-            </p>
-        </div>
+            </Plot>
+        </Container>
     );
 }
 
