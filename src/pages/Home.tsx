@@ -12,7 +12,7 @@ function Home() {
     return (
         <Container>
             <h1>Movie Search</h1>
-            <SearchBar />
+            <SearchBar keyword={""}/>
         </Container>
     );
 }
