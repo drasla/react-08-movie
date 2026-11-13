@@ -1,9 +1,9 @@
 import { Link, useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
-import SearchBar from "../components/SearchBar.jsx";
-import { Container } from "./Home.jsx";
+import SearchBar from "../components/SearchBar.tsx";
+import { Container } from "./Home.tsx";
 import styled from "styled-components";
-import MovieCard from "../components/MovieCard.jsx";
+import MovieCard from "../components/MovieCard.tsx";
 
 const List = styled.div`
     display: flex;

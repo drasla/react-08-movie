@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { Container } from "./Home.jsx";
+import { Container } from "./Home.tsx";
 import styled from "styled-components";
 
 const BackBtn = styled.button`
