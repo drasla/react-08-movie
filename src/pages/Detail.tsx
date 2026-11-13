@@ -12,7 +12,7 @@ const BackBtn = styled.button`
     font-size: 16px;
     cursor: pointer;
     padding: 0;
-    
+
     &:hover {
         text-decoration: underline;
     }
@@ -23,16 +23,31 @@ const Plot = styled.p`
     margin-top: 20px;
 `;
 
+type MovieDetail = {
+    Title: string;
+    Genre: string;
+    Plot: string;
+    Poster: string;
+    Year: string;
+    Director: string;
+};
+
 function Detail() {
     const { id } = useParams();
-    const [movie, setMovie] = useState(null);
+    const [movie, setMovie] = useState<MovieDetail | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`https://www.omdbapi.com/?apikey=6a0a8eb4&i=${id}&plot=full`)
             .then(res => res.json())
-            .then(json => setMovie(json))
-            .catch(err => console.log(err));
+            .then((json: MovieDetail) => setMovie(json))
+            .catch((err: unknown) => {
+                if (err instanceof Error) {
+                    console.log(err.message);
+                } else {
+                    console.log("알 수 없는 오류가 발생하였습니다. " + err);
+                }
+            });
     }, []);
 
     if (!movie) {
@@ -55,9 +70,7 @@ function Detail() {
             <p>
                 <strong>Director:</strong> {movie.Director}
             </p>
-            <Plot>
-                {movie.Plot}
-            </Plot>
+            <Plot>{movie.Plot}</Plot>
         </Container>
     );
 }
